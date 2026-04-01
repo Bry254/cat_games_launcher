@@ -16,7 +16,7 @@ Launcher simple para lanzar juegos de linux creado en rust con egui pensado para
 Descarga el programa desde [releases](https://github.com/Bry254/cat_games_launcher/releases), configuralo para que se ejecute como programa y dale click.
 
 ## Compilacion
-- Escribe en terminal (Nesesitas tener [rust](https://www.rust-lang.org/) y [git](https://git-scm.com/install/linux) instalado en tu sistema) (solo compila la interfaz):
+- Escribe en terminal (Nesesitas tener [rust](https://www.rust-lang.org/) y [git](https://git-scm.com/install/linux) instalado en tu sistema):
 ```bash
 git clone https://github.com/Bry254/cat_games_launcher && cd cat_games_launcher && cargo build --release && cp ./target/release/cat_games_launcher ./
 ```
