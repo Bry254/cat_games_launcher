@@ -1,13 +1,16 @@
 # CAT GAMES LAUNCHER
+![logo](/src/icon.png)
 Launcher simple para lanzar juegos de linux creado en rust con egui pensado para ser sencillo de utilizar.
 ---
 > ⚠️ **Build experimental (beta)**
 > 
 > Esta aplicación se encuentra en fase **beta (experimental)**.  
 > Pueden existir errores o comportamientos inesperados.
+![Captura de launcher](/cat_games_launcher_capture.png)
+
 
 ## Instalación
-Descarga el archivo de los `releases`, configuralo para que se ejecute como programa y dale click.
+Descarga el programa desde [releases](https://github.com/Bry254/cat_games_launcher/releases), configuralo para que se ejecute como programa y dale click.
 
 ## Compilacion
 - Escribe en terminal (Nesesitas tener [rust](https://www.rust-lang.org/) y [git](https://git-scm.com/install/linux) instalado en tu sistema) (solo compila la interfaz):
@@ -22,4 +25,4 @@ Esto te soltara el launcher `cat_games_launcher` en la carpeta solo haz click en
 - Configuraciones que puedes desactivar y activar por juegos.
 - Exportar la configuración de tu juego en un archivo .cat_game para despues poderlo importar.
 - Puedes crear tus propios runners (por ejemplo añadir la opcion de poder jugar con `proton` )
-- Detectado de icono del juego (si utilizas juegos .exe podrias instalar `wrestool` ó `icoextract` para que el programa obtenga sus iconos automaticamente)
+- Detecta el icono del juego (si utilizas juegos .exe podrias instalar `wrestool` ó `icoextract` para que el programa obtenga sus iconos automaticamente)
