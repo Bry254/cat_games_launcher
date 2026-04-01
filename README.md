@@ -1,4 +1,6 @@
-![logo](/src/icon.png)
+<p align="center">
+  <img src="/src/icon.png" width="120">
+</p>
 # CAT GAMES LAUNCHER
 Launcher simple para lanzar juegos de linux creado en rust con egui pensado para ser sencillo de utilizar.
 ---
