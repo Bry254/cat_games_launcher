@@ -1,5 +1,5 @@
-# CAT GAMES LAUNCHER
 ![logo](/src/icon.png)
+# CAT GAMES LAUNCHER
 Launcher simple para lanzar juegos de linux creado en rust con egui pensado para ser sencillo de utilizar.
 ---
 > ⚠️ **Build experimental (beta)**
