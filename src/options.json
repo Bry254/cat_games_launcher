@@ -1,0 +1,65 @@
+{
+  "global": [
+    {
+      "name": "Display",
+      "tipo": "prefix",
+      "cmd": "DISPLAY=$1",
+      "mode": "input",
+      "input": ":0"
+    },
+    {
+      "name": "Zink",
+      "tipo": "prefix",
+      "cmd": "MESA_LOADER_DRIVER_OVERRIDE=zink",
+      "mode": "toggle"
+    },
+    {
+      "name": "Nvidia",
+      "tipo": "prefix",
+      "cmd": "__NV_PRIME_RENDER_OFFLOAD=1 __VK_LAYER_NV_optimus=NVIDIA_only __GLX_VENDOR_LIBRARY_NAME=nvidia",
+      "mode": "toggle"
+    },
+    {
+      "name": "Mangohud",
+      "tipo": "command",
+      "cmd": "mangohud",
+      "mode": "toggle"
+    },
+    {
+      "name": "Game Mode",
+      "tipo": "command",
+      "cmd": "gamemoderun",
+      "mode": "toggle"
+    }
+  ],
+  "runners": {
+    "linux": {
+      "command": "$add_bin",
+      "options": [
+        {
+          "name": "Wayland sdl2",
+          "tipo": "prefix",
+          "cmd": "SDL_VIDEODRIVER=wayland SDL_DYNAMIC_API=/usr/lib64/libSDL2-2.0.so",
+          "mode": "toggle"
+        },
+        {
+          "name": "Wayland sld3",
+          "tipo": "prefix",
+          "cmd": "SDL_VIDEODRIVER=wayland SDL_DYNAMIC_API=/usr/lib/libSDL3.so",
+          "mode": "toggle"
+        }
+      ]
+    },
+    "wine": {
+      "command": "wine $add_bin",
+      "options": [
+        {
+          "name": "Wineprefix",
+          "tipo": "prefix",
+          "cmd": "WINEPREFIX=$1",
+          "mode": "folder"
+        }
+      ]
+    }
+  }
+}
