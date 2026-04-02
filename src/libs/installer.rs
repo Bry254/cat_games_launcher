@@ -41,7 +41,7 @@ impl Runner_installer {
     pub fn new(path: &String) -> anyhow::Result<Self> {
         let data = fs::read_to_string(path)?;
         println!("{data}");
-        let r: Self = serde_json::from_str(data.as_str()).unwrap();
+        let r: Self = serde_json::from_str(data.as_str())?;
         println!("{:?}", r);
         return Ok(r);
     }
