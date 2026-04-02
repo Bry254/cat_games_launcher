@@ -7,6 +7,7 @@ use std::{
 
 use crate::{
     libs::{
+        dialogos,
         extractor::{self},
         utils::notify,
         vars::{self, Variables},
@@ -19,12 +20,15 @@ use serde::{Deserialize, Serialize};
 pub struct Action {
     mode: String,
     data: String,
+    #[serde(default)]
     target: String,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Runner_installer {
     name: String,
+    #[serde(default)]
+    description: String,
     #[serde(default)]
     pub command: String,
     pub options: Vec<RunnerOption>,
@@ -36,7 +40,9 @@ pub struct Runner_installer {
 impl Runner_installer {
     pub fn new(path: &String) -> anyhow::Result<Self> {
         let data = fs::read_to_string(path)?;
-        let r: Self = serde_json::from_str(data.as_str())?;
+        println!("{data}");
+        let r: Self = serde_json::from_str(data.as_str()).unwrap();
+        println!("{:?}", r);
         return Ok(r);
     }
 
@@ -66,6 +72,12 @@ impl Runner_installer {
         };
     }
     pub fn install(&self) -> anyhow::Result<()> {
+        if !dialogos::confirm(
+            format!("Instalar {} ?", self.name).as_str(),
+            &self.description,
+        ) {
+            return Ok(());
+        }
         let variables = vars::Variables::default();
         for i in &self.actions {
             let data = variables.apply(&i.data);

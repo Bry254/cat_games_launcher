@@ -1,9 +1,6 @@
 use egui::TextureHandle;
 
-use crate::libs::{
-    desktop::IconProcesor,
-    {dialogos, lutris},
-};
+use crate::libs::{desktop::IconProcesor, dialogos, lutris, utils::notify};
 use crate::utils::config::{Config, Runner, RunnerOption, RunnerVarOption};
 use crate::utils::game::{GameConfig, Games};
 use std::env;
@@ -37,19 +34,35 @@ impl ConfigAdd {
         self.args = game.args.clone();
         self.env = game.prefix.clone();
         self.icon = game.icon.clone();
-        for v in &game.options {
-            if let Some(runner) = configs.runners.get_mut(&game.runner_name) {
-                if let Some(option) = runner.options.iter_mut().find(|g| g.name == v.name) {
-                    *option = v.clone();
+        self.runner = game.runner_name.clone();
+
+        if let Some(runner) = configs.runners.get_mut(&game.runner_name) {
+            for option in &game.options {
+                if let Some(runner_option) =
+                    runner.options.iter_mut().find(|o| o.name == option.name)
+                {
+                    runner_option.input = option.input.clone();
+                    runner_option.enable = option.enable;
+                }
+            }
+
+            for var in &game.vars {
+                if let Some(runner_var) = runner.variables.iter_mut().find(|v| v.name == var.name) {
+                    runner_var.input = var.input.clone();
                 }
             }
         }
-        for v in &game.global {
-            if let Some(global) = configs.global.iter_mut().find(|g| g.name == v.name) {
-                *global = v.clone();
+
+        for global_option in &game.global {
+            if let Some(global_var) = configs
+                .global
+                .iter_mut()
+                .find(|v| v.name == global_option.name)
+            {
+                global_var.input = global_option.input.clone();
+                global_var.enable = global_option.enable;
             }
         }
-        self.runner = game.runner_name.clone();
     }
     pub fn simple_clear(&mut self) {
         self.runner = String::new();
@@ -138,14 +151,11 @@ impl WinAdd {
         egui::Grid::new("variables")
             .min_col_width(120.0)
             .show(ui, |ui| {
-                for var in runners
-                    .get_mut(&self.config.runner)
-                    .unwrap()
-                    .variables
-                    .iter_mut()
-                {
-                    WinAdd::draw_varwidgets(ui, var);
-                    ui.end_row();
+                if let Some(runner) = runners.get_mut(&self.config.runner) {
+                    for var in runner.variables.iter_mut() {
+                        WinAdd::draw_varwidgets(ui, var);
+                        ui.end_row();
+                    }
                 }
             });
     }

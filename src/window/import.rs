@@ -43,10 +43,14 @@ impl WinImp {
                 ui.heading("Importar Runners");
                 if ui.button("Importar Runner (.cat_runner)").clicked() {
                     let path = dialogos::filepicker("instalador .cat_runner", &["cat_runner"]);
-                    let installer = installer::Runner_installer::new(&path).ok();
                     if !path.is_empty() {
+                        println!("[1/3] instalando {path}");
+                        let installer = installer::Runner_installer::new(&path).ok();
+                        println!("{:?}", installer);
                         if let Some(installer) = installer {
+                            println!("[2/3] instalando {path}");
                             if installer.install().is_ok() {
+                                println!("[3/3] instalando {path}");
                                 installer.import(&mut configfile);
                             };
                         }
