@@ -47,11 +47,13 @@ impl MyApp {
         );
         let mut config: utils::config::Config = serde_json::from_str(data.as_str()).unwrap();
         for (_, runner) in config.runners.iter_mut() {
+            println!("{}", runner.command);
             for i in runner.variables.iter_mut() {
                 if i.mode == "file_names" {
                     let path = i.cmd.replace("$HOME", &variables.HOME);
                     let dir = Path::new(&path);
                     for entry in fs::read_dir(dir).unwrap().flatten() {
+                        println!("{:?}", entry.file_name());
                         i.values
                             .push(entry.file_name().to_string_lossy().to_string());
                     }

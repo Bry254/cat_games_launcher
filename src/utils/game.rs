@@ -233,8 +233,9 @@ impl Games {
         }
         if let Some(gid) = game_id {
             id = gid.clone();
-            println!("Editing game with id: {}", id);
+            println!("[Modo edición]");
         }
+        println!("Id de juego: {id}");
         self.configs.insert(id.clone(), juego.clone());
         if Path::new(&juego.icon).exists() {
             if let Ok(img) = load_image(ctx, &juego.icon, &format!("{id}_icon")) {
